@@ -119,6 +119,13 @@
                  tal:attributes="id string:${input_id}_day;"/>
        </tal:ymd>
       <tal:ymd condition="show_ymd">
+        <input type="hidden"
+               id="ic_day" 
+               value="1"
+               tal:attributes="id string:${input_id}_day;
+                               name string:${inputname}_day;"/>
+        
+        
         <span>
           <select name="ic_month"
                   id="ic_month"
