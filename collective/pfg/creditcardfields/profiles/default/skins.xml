@@ -15,7 +15,7 @@
       of your product (on the filesystem) as Filesystem Directory Views within
       the portal_skins tool, so that they become usable as skin layers.
       -->
- <object name="pfgcaptchafield"
+ <object name="pfgcreditcardfields"
     meta_type="Filesystem Directory View"
     directory="collective.pfg.creditcardfields:skins/pfg_creditcardfields" />
 
@@ -32,7 +32,7 @@
        "all".
        -->
  <skin-path name="*">
-  <layer name="pfgcaptchafield" insert-after="custom" />
+  <layer name="pfgcreditcardfields" insert-after="custom" />
  </skin-path>
 
 </object>
