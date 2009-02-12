@@ -11,7 +11,6 @@ from Products.Archetypes.public import DateTimeField
 from Products.Archetypes.public import CalendarWidget
 
 from Products.CMFCore.permissions import View, ModifyPortalContent
-from Products.CMFCore.utils import getToolByName
 
 from zope.interface import implements
 
@@ -90,7 +89,8 @@ class FGCCExpirationDateField(BaseFormField):
             write_permission = View,
             widget=CalendarWidget(
                         macro="expirationdatecalendar",
-                        show_hm = False,
+                        show_hm=False,
+                        format="%m-%Y",
                     ),
             )
 
@@ -138,43 +138,30 @@ class FGCCExpirationDateField(BaseFormField):
         else:
             self.fgField.widget.future_years = None
             self.fgFutureYears = value            
-
-
-    def _toLocalizedTime(self, time, long_format=None):
-        tool = getToolByName(self, 'translation_service')
-        return tool.ulocalized_time(time, long_format=long_format)
-
-
+    
     def htmlValue(self, REQUEST):
         """ return from REQUEST, this field's value, rendered as XHTML.
         """
-
+        
         value = REQUEST.form.get(self.__name__, 'No Input')
-
+        
         # The replace('-','/') keeps the DateTime routine from
         # interpreting this as UTC. Odd, but true.
-
         try:
             dt = DateTime(value.replace('-','/'))
         except (DateTime.SyntaxError, DateTime.DateError):
             # probably better to simply return the input
             return cgi.escape(value)
-
-        if self.fgField.widget.show_hm:
-            ppt = getToolByName(self, 'portal_properties')
-            long_format = ppt.site_properties.localLongTimeFormat
-            value = self._toLocalizedTime(dt, long_format=long_format)
-        else:
-            value = self._toLocalizedTime(dt)
-
+        
+        value = dt.strftime("%m-%Y")
+        
         return cgi.escape(value)
-
-
+        
+    
     def specialValidator(self, value, field, REQUEST, errors):
         """ Archetypes isn't validating non-required dates --
             so we need to.
         """
-
         fname = field.getName()
         month = REQUEST.form.get('%s_month'%fname, '01')
         day = REQUEST.form.get('%s_month'%fname, '01')
