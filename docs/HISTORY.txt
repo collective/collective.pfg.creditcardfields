@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.2 (2010-05-19)
+----------------
+
+* Don't use the uniqueItemIndex, which is no longer present in Plone 4.
+  [davisagli]
+
 1.1 (2009-03-03)
 ----------------
 
