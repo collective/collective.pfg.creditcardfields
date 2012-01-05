@@ -1,9 +1,11 @@
 Changelog
 =========
 
-1.3 (unreleased)
-----------------
+1.2.1 (unreleased)
+------------------
 
+* Make sure the field label is rendered with recent Archetypes versions.
+  [davisagli]
 
 1.2 (2010-05-19)
 ----------------
