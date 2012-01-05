@@ -24,6 +24,7 @@ setup(name='collective.pfg.creditcardfields',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Products.Archetypes>=1.7.7',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

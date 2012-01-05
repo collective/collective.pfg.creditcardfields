@@ -65,12 +65,6 @@ ccexpdate_schema = BaseFieldSchemaStringDefault.copy() + Schema((
 finalizeFieldSchema(ccexpdate_schema, folderish=True, moveDiscussion=False)
 
 
-class CCExpirationCalendarWidget(CalendarWidget):
-
-    def render_own_label(self):
-        return False
-
-
 class FGCCExpirationDateField(BaseFormField):
     """ CC Expiration Date Entry Field """
     
@@ -94,7 +88,7 @@ class FGCCExpirationDateField(BaseFormField):
             searchable=0,
             required=0,
             write_permission = View,
-            widget=CCExpirationCalendarWidget(
+            widget=CalendarWidget(
                         macro="expirationdatecalendar",
                         show_hm=False,
                         format="%m-%Y",
